@@ -368,7 +368,70 @@ section {
     margin-bottom: 10px;
     color: var(--text-dark);
 }
+/* Internships Section */
+#internships {
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+}
 
+.internship-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    background: white;
+    border-top: 3px solid transparent;
+    background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    height: 100%;
+}
+
+.internship-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-top: 3px solid #133de5;
+}
+
+.internship-img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.internship-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.internship-card:hover .internship-img img {
+    transform: scale(1.1);
+}
+
+.internship-content {
+    padding: 25px;
+}
+
+.internship-content h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    background: var(--secondary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.internship-date {
+    color: #3e64ff;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.internship-content p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
 /* Projects Section */
 #projects {
     background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
