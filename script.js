@@ -1,29 +1,21 @@
-// Skills tabs functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Skills tabs functionality
     const skillTabs = document.querySelectorAll('.skills-tab');
     const skillCategories = document.querySelectorAll('.skill-category');
     
     skillTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Remove active class from all tabs
             skillTabs.forEach(t => t.classList.remove('active'));
-            
-            // Add active class to clicked tab
             tab.classList.add('active');
             
-            // Get category to show
             const category = tab.getAttribute('data-category');
-            
-            // Hide all categories
             skillCategories.forEach(cat => cat.classList.remove('active'));
-            
-            // Show selected category
             document.getElementById(`${category}-skills`).classList.add('active');
         });
     });
     
     // Animation on scroll
-    const animatedElements = document.querySelectorAll('.animate-left, .animate-right, .animate-up');
+    const animatedElements = document.querySelectorAll('.animate-left, .animate-right, .animate-up, .internship-card');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -35,9 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, { threshold: 0.1 });
     
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
+    animatedElements.forEach(el => observer.observe(el));
     
     // Navbar background change on scroll
     window.addEventListener('scroll', function() {
@@ -71,22 +61,26 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Simple form validation
-        const name = this.querySelector('input[name="name"]').value;
-        const email = this.querySelector('input[name="email"]').value;
-        const subject = this.querySelector('input[name="_subject"]').value;
-        const message = this.querySelector('textarea[name="message"]').value;
+        const name = this.querySelector('input[name="name"]').value.trim();
+        const email = this.querySelector('input[name="email"]').value.trim();
+        const subject = this.querySelector('input[name="_subject"]').value.trim();
+        const message = this.querySelector('textarea[name="message"]').value.trim();
         
         if (!name || !email || !subject || !message) {
             alert('Please fill in all fields');
             return;
         }
-        
-        // If using FormSubmit, the form will automatically submit
-        // You can add additional processing here if needed
-        
-        alert('Thank you for your message! I will get back to you soon.');
-        this.reset();
+
+        // Send form data using fetch (FormSubmit alternative)
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this)
+        }).then(() => {
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        }).catch(() => {
+            alert('Something went wrong. Please try again later.');
+        });
     });
     
     // Project modal
@@ -97,27 +91,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const project = button.getAttribute('data-project');
             const iframe = document.getElementById('projectFrame');
             
-            // Set iframe source based on project
             if (project === 'fakePlate') {
                 iframe.src = 'https://www.youtube.com/embed/YwhV2nXJqhQ';
             }
         });
         
-        // Close modal when hidden
         projectModal.addEventListener('hidden.bs.modal', function() {
             const iframe = document.getElementById('projectFrame');
             iframe.src = '';
         });
     }
     
-    // Add smooth scrolling for navigation links
+    // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
